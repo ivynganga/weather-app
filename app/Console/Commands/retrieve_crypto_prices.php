@@ -52,7 +52,6 @@ class retrieve_crypto_prices extends Command
             $assetid = Str::upper($assets->code);
             $exchange_url = $exchange_url.$assetid.'/usd';
             $response_er = Http::withHeaders(['X-CoinAPI-Key' => env('COINAPI_APIKEY')])->get($exchange_url)->json();
-            print_r($response_er);die;
             $amount_usd = $response_er['rate'];
             $exchangerate_url = 'https://v6.exchangerate-api.com/v6/pair/usd/kes/'.$amount_usd;
             $response_ex = Http::withHeaders(['Authorization' => 'Bearer '.env('EXCHANGERATEAPI_TOKEN')])->get($exchangerate_url)->json();
