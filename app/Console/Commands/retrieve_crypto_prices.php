@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Asset;
 use App\Models\AssetPrice;
 
-class daily extends Command
+class retrieve_crypto_prices extends Command
 {
     /**
      * The name and signature of the console command.
