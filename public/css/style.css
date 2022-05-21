@@ -1,0 +1,60 @@
+@font-face {
+    font-family: Jost;
+    src: url('/fonts/Jost.ttf');
+}
+
+body{
+	background: var(--bg-dark);
+	color: var(--white);
+	font-family: Jost, sans-serif;
+}
+
+hr {
+	background: var(--gray);
+}
+
+.maincontent {
+	padding: 20px;
+}
+
+.header {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+}
+
+.card {
+	margin: 50px auto 0;
+	width: 80%;
+	border-radius: 20px;
+	padding: 5px;
+	box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+	background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+	text-align: center;
+}
+
+.card-content {
+	background: var(--bg-dark);
+	border-radius: 17px;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.last-check, #time {
+	width: 50%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.data-display-error{
+	padding-top: 130px;
+}
+
+.asseticon {
+	height: 50px;
+}
+
+.crypto-row {
+	margin-top: -30px;
+}
