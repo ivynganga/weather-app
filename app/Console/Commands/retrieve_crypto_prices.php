@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use App\Asset;
-use App\AssetPrice;
+use App\Models\Asset;
+use App\Models\AssetPrice;
 
 class daily extends Command
 {
