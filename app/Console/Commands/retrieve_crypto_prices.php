@@ -15,7 +15,7 @@ class retrieve_crypto_prices extends Command
      *
      * @var string
      */
-    protected $signature = 'crypto:updateprice';
+    protected $signature = 'crypto:update_price';
 
     /**
      * The console command description.

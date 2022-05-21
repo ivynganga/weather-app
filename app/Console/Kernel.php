@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //$schedule->command('crypto:updateprice')->daily()->at('9:00');
-        $schedule->command('crypto:updateprice')->everyMinute();
+        $schedule->command('crypto:update_price')->everyMinute();
+        $schedule->command('crypto:update_asset')->everyMinute();
     }
 
     /**
