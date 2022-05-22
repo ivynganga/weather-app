@@ -34,7 +34,7 @@ class AssetPriceController extends Controller
 
 
     public function get() {
-        $response = cache::remember('cryptoprice', now()->addseconds(5), function () {
+        $response = cache::remember('cryptoprice', now()->addseconds(27000), function () {
             $result = AssetPrice::with('asset')->orderByDesc('id')->limit(6)->get()->sortBy('asset_id');
             return($result);
         });

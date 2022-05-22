@@ -9,7 +9,7 @@ Crypto Price
 
 @if ($cryptos->isNotEmpty())
     <div class="container-fluid last-check">
-        <p>As at {{ date('jS M, Y g:iA ', strtotime($cryptos->last()->date)) }}. </p>
+        <p>As at {{ date('jS M, Y g:iA', strtotime($cryptos->last()->date)) }}. </p>
     </div>
     
     <div class="row crypto-row">
