@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Asset;
+use View;
 
 
 class AssetController extends Controller {
-    private $asset_ids = array('btc', 'eth', 'ltc', 'doge', 'usdt', 'bch');
+    private $asset_ids;
+
+    public function __construct() 
+    {
+        $this->asset_ids = array('btc', 'eth', 'ltc', 'doge', 'usdt', 'bch');
+        View::share('asset_ids', $this->asset_ids);
+    }
 
 
 
