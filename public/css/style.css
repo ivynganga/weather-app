@@ -1,0 +1,61 @@
+@font-face {
+    font-family: Jost;
+    src: url('/fonts/Jost.ttf');
+}
+
+:root {
+
+	--bg-dark: #071931;
+	--bg-darker: #061528;
+	--red: #ff0000;
+}
+
+body{
+	background: var(--bg-dark);
+	color: var(--bs-white);
+	font-family: Jost, sans-serif;
+}
+
+.maincontent {
+	padding: 20px;
+}
+
+.header {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+}
+
+ion-icon {
+	color: var(--bs-white);
+}
+
+.form-errors, .form-errors ion-icon {
+	color: var(--red);
+}
+
+.form-errors>li{
+	list-style-type: none;
+}
+
+.card {
+	width: 30rem;
+	margin: auto;
+	margin-top: 20px;
+	border-radius: 25px;
+	background: linear-gradient(145deg, #06172c, #071b34);
+	box-shadow:  7px 7px 13px #030a14,
+				-7px -7px 13px #0b284e;
+}
+
+.result-title {
+	font-weight: normal;
+}
+
+.result-temperature {
+	font-size: 60px;
+}
+
+.result-temp-range {
+	font-size: 18px;
+}
