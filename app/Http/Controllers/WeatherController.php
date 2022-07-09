@@ -13,27 +13,52 @@ class WeatherController extends Controller
 
         $latitude = -1.2832533;
         $longitude = 36.8172449;
-        $weather = $this->weather($latitude, $longitude);
-        if (is_array($weather) && sizeof($weather) > 0) {
-            if (strlen(trim($weather['weather'])) > 0) {
-                $result['condition'] = trim($weather['weather']);
+        $current_weather = $this->current_weather($latitude, $longitude);
+        $forecast = $this->forecast_weather($latitude, $longitude);
+        if (is_array($current_weather) && sizeof($current_weather) > 0) {
+            if (strlen(trim($current_weather['weather'])) > 0) {
+                $result['condition'] = trim($current_weather['weather']);
             }
-            if (strlen(trim($weather['description'])) > 0) {
-                $result['description'] = trim($weather['description']);
+            if (strlen(trim($current_weather['description'])) > 0) {
+                $result['description'] = trim($current_weather['description']);
             }
-            if (strlen(trim($weather['temp'])) > 0) {
-                $result['temp'] = trim($weather['temp']);
+            if (strlen(trim($current_weather['temp'])) > 0) {
+                $result['temp'] = trim($current_weather['temp']);
             }
-            if (strlen(trim($weather['temp_high'])) > 0) {
-                $result['temp_high'] = trim($weather['temp_high']);
+            if (strlen(trim($current_weather['temp_high'])) > 0) {
+                $result['temp_high'] = trim($current_weather['temp_high']);
             }
-            if (strlen(trim($weather['temp_low'])) > 0) {
-                $result['temp_low'] = trim($weather['temp_low']);
+            if (strlen(trim($current_weather['temp_low'])) > 0) {
+                $result['temp_low'] = trim($current_weather['temp_low']);
             }
         }
-        else {
 
+        if (is_array($forecast) && sizeof($forecast) > 0) {
+            $count = 0;
+            foreach ($forecast as $i => $j) {
+
+                if (strlen(trim($j['date'])) > 0) {
+                    $result['forecast'][$count]['date'] = trim($j['date']);
+                }
+                if (strlen(trim($j['weather'])) > 0) {
+                    $result['forecast'][$count]['condition'] = trim($j['weather']);
+                }
+                if (strlen(trim($j['description'])) > 0) {
+                    $result['forecast'][$count]['description'] = trim($j['description']);
+                }
+                if (strlen(trim($j['temp'])) > 0) {
+                    $result['forecast'][$count]['temp'] = trim($j['temp']);
+                }
+                if (strlen(trim($j['temp_high'])) > 0) {
+                    $result['forecast'][$count]['temp_high'] = trim($j['temp_high']);
+                }
+                if (strlen(trim($j['temp_low'])) > 0) {
+                    $result['forecast'][$count]['temp_low'] = trim($j['temp_low']);
+                }
+                $count++;
+            }
         }
+   
         $result['city'] = 'Nairobi';
         $result['country_code'] = 'KE';
         return view('index')->with('data', $result);
@@ -56,47 +81,28 @@ class WeatherController extends Controller
             $latitude = $geo['latitude'];
             $longitude = $geo['longitude'];
             if (strlen(trim($geo['latitude'])) > 0 && strlen(trim($geo['longitude'])) > 0) {
-                $weather = $this->weather($latitude, $longitude);
-                if (is_array($weather) && sizeof($weather) > 0) {
-                    if (strlen(trim($weather['weather'])) > 0) {
-                        $condition = trim($weather['weather']);
+                $current_weather = $this->current_weather($latitude, $longitude);
+                if (is_array($current_weather) && sizeof($current_weather) > 0) {
+                    if (strlen(trim($current_weather['weather'])) > 0) {
+                        $condition = trim($current_weather['weather']);
                     }
-                    if (strlen(trim($weather['description'])) > 0) {
-                        $description = trim($weather['description']);
+                    if (strlen(trim($current_weather['description'])) > 0) {
+                        $description = trim($current_weather['description']);
                     }
-                    if (strlen(trim($weather['temp'])) > 0) {
-                        $temp = trim($weather['temp']);
+                    if (strlen(trim($current_weather['temp'])) > 0) {
+                        $temp = trim($current_weather['temp']);
                     }
-                    if (strlen(trim($weather['temp_high'])) > 0) {
-                        $temp_high = trim($weather['temp_high']);
+                    if (strlen(trim($current_weather['temp_high'])) > 0) {
+                        $temp_high = trim($current_weather['temp_high']);
                     }
-                    if (strlen(trim($weather['temp_low'])) > 0) {
-                        $temp_low = trim($weather['temp_low']);
+                    if (strlen(trim($current_weather['temp_low'])) > 0) {
+                        $temp_low = trim($current_weather['temp_low']);
                     }
                     $city = ucwords($city);
                     $country_code = strtoupper($country);
 
-                    //if (strlen(trim($weather['weather'])) > 0) {
-                    //    $result['condition'] = trim($weather['weather']);
-                    //}
-                    //if (strlen(trim($weather['description'])) > 0) {
-                    //    $result['description'] = trim($weather['description']);
-                    //}
-                    //if (strlen(trim($weather['temp'])) > 0) {
-                    //    $result['temp'] = trim($weather['temp']);
-                    //}
-                    //if (strlen(trim($weather['temp_high'])) > 0) {
-                    //    $result['temp_high'] = trim($weather['temp_high']);
-                    //}
-                    //if (strlen(trim($weather['temp_low'])) > 0) {
-                    //    $result['temp_low'] = trim($weather['temp_low']);
-                    //}
-                    //$result['city'] = ucwords($city);
-                    //$result['country_code'] = strtoupper($country);
                 }
-                return redirect('/')->with(['weather' => $condition, 'description' => $description, 'temp' => $temp, 'temp_high' => $temp_high, 'temp_low' => $temp_low, 'city' => $city, 'country_code' => $country_code]);
-                //return redirect('/')->with($result);
-                //print_r($result);
+                return redirect('/')->with(['current_weather' => $condition, 'description' => $description, 'temp' => $temp, 'temp_high' => $temp_high, 'temp_low' => $temp_low, 'city' => $city, 'country_code' => $country_code]);
             }
 
         }
@@ -167,7 +173,7 @@ class WeatherController extends Controller
     }
 
 
-    public function weather($latitude = null, $longitude = null) {
+    public function current_weather($latitude = null, $longitude = null) {
         $result = array();
 
         if (strlen(trim($latitude)) > 0 && strlen(trim($longitude)) > 0) {
@@ -207,6 +213,54 @@ class WeatherController extends Controller
                 }
             }
 
+        }
+        return ($result);
+    }
+
+    function forecast_weather($latitude, $longitude) {
+        $result = array();
+
+        if (strlen(trim($latitude)) > 0 && strlen(trim($longitude)) > 0) {
+            $url = 'api.openweathermap.org/data/2.5/forecast?lat='.trim($latitude).'&lon='.trim($longitude).'&appid='.env('WEATHER_API_KEY').'&units=metric';
+            $response = Http::get($url)->json();
+            if ($response['cod'] == 200 && is_array($response['list']) && sizeof($response['list']) > 0) {
+                $count = 0;
+                foreach ($response['list'] as $i => $j) {
+                    $forecast_date = date('Y-m-d H:i', $j['dt']);
+                    $noon = explode(' ', $forecast_date);
+                    $noon = $noon[1];
+                
+                    if ($noon == '12:00') {
+                        $result[$count]['date'] = $forecast_date;
+                        if (is_array($j['weather']) && sizeof($j['weather']) > 0) {
+                            foreach($j['weather'] as $k => $l) {
+                                if (isset($l['main']) && strlen(trim($l['main'])) > 0 ) {
+                                    $result[$count]['weather'] = trim($l['main']);
+                                }
+                                if (isset($l['description']) && strlen(trim($l['description'])) > 0 ) {
+                                    $result[$count]['description'] = trim($l['description']);
+                                }
+                            }
+                        }
+            
+                        if (is_array($j['main']) && sizeof($j['main']) > 0) {
+                            if (isset($j['main']['temp']) && strlen(trim($j['main']['temp'])) > 0 ) {
+                                $result[$count]['temp'] = trim($j['main']['temp']);
+                            }
+                            if (isset($j['main']['temp_max']) && strlen(trim($j['main']['temp_max'])) > 0 ) {
+                                $result[$count]['temp_high'] = trim($j['main']['temp_max']);
+                            }
+                            if (isset($j['main']['temp_min']) && strlen(trim($j['main']['temp_min'])) > 0 ) {
+                                $result[$count]['temp_low'] = trim($j['main']['temp_min']);
+                            }
+                        }
+                        $count++;
+                    }
+                    if ($count == 4) {
+                        break;
+                    }
+                }
+            }
         }
         return ($result);
     }

@@ -3,6 +3,7 @@
 
 @section('content')
 
+{{ dd( $data) }} ;
 
 <div class="row"></div>
 	<div class="col-md-6">
