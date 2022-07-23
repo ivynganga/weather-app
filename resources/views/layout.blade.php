@@ -6,12 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Weather App</title>
 
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/style.css') }}" rel="stylesheet">
-	{{--<link href="{{ asset('/fontawesome/css/all.css')}}" rel="stylesheet">--}}
-	
-	<script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="{{ asset('js/style.js') }}" defer></script>
+	<link href="/css/app.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<script src="/js/app.js" defer></script>
+	<script src="/js/style.js" defer></script>
 </head>
 
 
