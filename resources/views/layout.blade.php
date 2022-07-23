@@ -6,11 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Crypto Price in KES</title>
 
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+	<link href="/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/style.css">
 	
-	<script src="{{ asset('js/app.js') }}" defer></script>
-	<script src="{{ asset('js/style.js') }}" defer></script>
+	<script src="/js/app.js" defer></script>
+	<script src="js/style.js" defer></script>
 </head>
 
 
