@@ -152,7 +152,7 @@ class WeatherController extends Controller
         return($result);
     }
 
-    public function geo($city = null, $country = null) {
+    public function geo($city, $country) {
         $result = array();
 
         if (strlen(trim($city)) > 0 && strlen(trim($country)) > 0) {

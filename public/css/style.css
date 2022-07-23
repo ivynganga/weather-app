@@ -48,6 +48,10 @@ ion-icon {
 				-7px -7px 13px #0b284e;
 }
 
+.forecast-card {
+	width: 20rem;
+}
+
 .result-title {
 	font-weight: normal;
 }

@@ -2,8 +2,8 @@
 
 
 @section('content')
-
-<div class="row"></div>
+{{--{{ print_r($data )}}--}}
+<div class="row">
 	<div class="col-md-6">
 		<form method="POST" action="/weather">
 			@csrf
@@ -108,7 +108,24 @@
 	</div>
 
 
-	<div class="col-md-6"></div>
+	<div class="col-md-6">
+		@if (is_array($data['forecast']) && sizeof($data['forecast']) > 0)
+		<div class="row">
+			@foreach ($data['forecast'] as $forecast)
+					<div class="col-md-6">
+						<div class="card forecast-card">
+							<div class="card-body">
+								<h3 class="result-title">{{ date('l jS', strtotime($forecast['date'])) }}</h3>
+								@if ($forecast['temp'])
+									<span class="result-temperature">{{ (int)($forecast['temp']) }}&#176;</span>
+								@endif
+							</div>
+						</div>
+					</div>
+				@endforeach
+			</div>
+		@endif	
+	</div>
 </div>
 
 
